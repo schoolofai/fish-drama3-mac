@@ -1,6 +1,7 @@
 # fish-drama3-mac
 
 **Video:** https://youtu.be/VoO0akJX6VU ("Fish Audio Drama 3: Can You Tell Which Is ElevenLabs? (Free, on a Mac)", ProAI Clips)
+**Substack:** https://proaiclips.substack.com/p/fish-audio-drama-3-can-you-tell-which
 
 Run **Fish Audio Drama 3** locally on an Apple Silicon Mac with [mlx-audio](https://github.com/Blaizzy/mlx-audio) and the community 8-bit MLX conversion [`mlx-community/fish-audio-drama-3-8bit`](https://huggingface.co/mlx-community/fish-audio-drama-3-8bit). Every tag from the video's 13-beat showcase is in [`examples/lines.json`](examples/lines.json).
 
