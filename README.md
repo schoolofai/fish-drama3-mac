@@ -22,7 +22,7 @@ Each step lists what it does, the exact command, what you should see, and where 
   git clone https://github.com/schoolofai/fish-drama3-mac repo && cp repo/*.py . && cp -r repo/examples .
   ```
 - **Expect:** no errors; `ls` shows `examples  inputs  models  out  run_tests.py  whisper_check.py`.
-- **Video:** 6:54
+- **Video:** 7:33
 
 ### 2. Create a Python 3.12 environment
 - **What:** an isolated environment so nothing touches your system Python.
@@ -31,7 +31,7 @@ Each step lists what it does, the exact command, what you should see, and where 
   uv venv .venv --python 3.12 && . .venv/bin/activate
   ```
 - **Expect:** `Creating virtual environment at: .venv`, then `(.venv)` at the start of your prompt.
-- **Video:** 6:54
+- **Video:** 7:33
 
 ### 3. Install mlx-audio from its main branch
 - **What:** Drama 3 support (`fish_drama3`) is merged into mlx-audio's `main` branch but not yet in a release, so install from GitHub.
@@ -40,7 +40,7 @@ Each step lists what it does, the exact command, what you should see, and where 
   uv pip install "mlx-audio @ git+https://github.com/Blaizzy/mlx-audio" "huggingface_hub[cli]" soundfile faster-whisper
   ```
 - **Expect:** `Installed N packages` at the end (about 1 GB). No cmake needed.
-- **Video:** 7:01
+- **Video:** 7:41
 
 ### 4. Download the 8-bit MLX model (42 GB)
 - **What:** the community conversion. Routed experts are 8-bit (from Fish's FP8 release); everything else stays bf16.
@@ -49,7 +49,7 @@ Each step lists what it does, the exact command, what you should see, and where 
   hf download mlx-community/fish-audio-drama-3-8bit --local-dir models/drama-3-8bit
   ```
 - **Expect:** a progress bar, then about 42 GB in `models/drama-3-8bit` (about 25 minutes at ~25 MB/s).
-- **Video:** 7:10
+- **Video:** 7:49
 
 ### 5. Generate the showcase lines
 - **What:** loads the model once (about 10 s warm, ~23 s the first time), then renders every line in `examples/lines.json` for seeds 13, 113 and 213. All character lines use one voice setting, "Voice 3": **no reference clip**, direction `[warm, theatrical, strong Spanish accent]`.
@@ -59,17 +59,17 @@ Each step lists what it does, the exact command, what you should see, and where 
   python run_tests.py --lines examples/fernando.json --seeds 13,113,213 --out out/fernando
   ```
 - **Expect:** a line like `{"event": "load", "seconds": 10.5}`, then one JSON line per take with `gen_s`, `audio_s`, `rtf` (1.2-1.9 on an M4 Max, i.e. slower than real time) and `peak_gb` (about 50-56). WAVs land in `out/`, plus `out/takes.json`. `/usr/bin/time -l` prints the whole-process `peak memory footprint` at the end (we saw 98.6 GB).
-- **Video:** 7:16 (showcase from 1:19, Uncle Fernando at 5:38)
+- **Video:** 7:55 (showcase from 1:13, Uncle Fernando at 5:56)
 
 ### 6. Whisper-check every take and re-roll failures
-- **What:** Drama 3 sometimes drops a sentence, stops early or runs on into silence (about 1 in 3 directed takes for us; the crying line failed every time). This transcribes each take and flags it.
+- **What:** Drama 3 sometimes drops a sentence, stops early or runs on into silence (7 of 54 takes in our final batch, about 1 in 3 in earlier tests). This transcribes each take and flags it.
 - **Command:**
   ```bash
   python whisper_check.py --takes out/takes.json
   python whisper_check.py --takes out/fernando/takes.json
   ```
-- **Expect:** one line per take, `OK` or `REROLL` with its word error rate and trailing silence, then e.g. `41 OK, 13 to re-roll`. Re-run step 5 with new `--seeds` for the REROLL lines.
-- **Video:** 8:03
+- **Expect:** one line per take, `OK` or `REROLL` with its word error rate and trailing silence, then e.g. `45 OK, 9 to re-roll`. Note: with the English Whisper model, Spanish lines can show as REROLL even when complete, so listen to those. Re-run step 5 with new `--seeds` for the REROLL lines.
+- **Video:** 8:42
 
 ### 7. (Optional) Clone your own voice
 - **What:** record 10-30 s of **your own** voice (or someone who has said yes) in a quiet room, save it as `inputs/ref.wav`, and its exact transcript as `inputs/ref.txt`.
@@ -78,7 +78,7 @@ Each step lists what it does, the exact command, what you should see, and where 
   python run_tests.py --ref inputs/ref.wav --ref-text inputs/ref.txt --lines examples/lines.json --seeds 13
   ```
 - **Expect:** the same lines, now in the reference voice. Cloning a real person without consent is banned by the licence.
-- **Video:** 6:13
+- **Video:** 6:53
 
 ## Tag cheat sheet (from the video)
 | Syntax | Example | Our result |
@@ -88,10 +88,10 @@ Each step lists what it does, the exact command, what you should see, and where 
 | paired tags | `<emphasis>`, `<whisper>`, `<fast>`, `<slow>`, `<soft>`, `<stress>`, `<forceful>` | worked |
 | `[pause]` | `The winner is... [pause] still stuck in traffic.` | worked |
 | two speakers | `<\|speaker:0\|> ... <\|speaker:1\|> ...` | worked |
-| English to Spanish switch / Spanish direction | `Bienvenidos de nuevo...` | partial (coin flip) |
-| crying | `[choked up, crying quietly] ... [voice breaking] ...` | failed (2nd sentence dropped) |
+| English to Spanish switch / Spanish direction | `Bienvenidos de nuevo...` | partial (2 of 3 complete) |
+| crying | `[choked up, crying quietly] ... [voice breaking] ...` | hit and miss (2 of 3 complete with Voice 3; 0 of 4 with a cloned voice) |
 
-Video timestamp for the syntax: 0:46.
+Video timestamp for the syntax: 0:40.
 
 ## Files
 - `run_tests.py`: load once, render lines x seeds, log RTF and memory (temperature 1.0, top_p 0.9, top_k 30).
