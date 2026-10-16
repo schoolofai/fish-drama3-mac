@@ -1,0 +1,74 @@
+[
+ [
+  "02_whisper",
+  "[warm, theatrical, strong Spanish accent, whispering] Don't wake the others. The demo starts in five minutes, and nobody has pressed save."
+ ],
+ [
+  "03_whisper_words",
+  "[warm, theatrical, strong Spanish accent] The build passed on the first try. <whisper>That has never happened before.</whisper>"
+ ],
+ [
+  "04_laugh",
+  "[warm, theatrical, strong Spanish accent] You set the timer for six hours instead of six minutes? [laughs] Okay, that explains the smell."
+ ],
+ [
+  "05_crying",
+  "[warm, theatrical, strong Spanish accent, choked up, crying quietly] I kept the old laptop on the shelf. [voice breaking] I just couldn't throw it away."
+ ],
+ [
+  "06_anger",
+  "[warm, theatrical, strong Spanish accent, through gritted teeth, keeping the voice down] I asked for one backup. [slow, dangerously quiet] Just one."
+ ],
+ [
+  "07_shouting",
+  "[warm, theatrical, strong Spanish accent, shouting, across a noisy room] The train leaves in two minutes! Grab the bags and run!"
+ ],
+ [
+  "08_sigh",
+  "[warm, theatrical, strong Spanish accent] [sighs] Fine. We'll do it the long way. Again."
+ ],
+ [
+  "09_breath",
+  "[warm, theatrical, strong Spanish accent] [shaky breath] Okay. I can do this. [breath] Opening the results now."
+ ],
+ [
+  "10_pause",
+  "[warm, theatrical, strong Spanish accent] The winner of tonight's award is... [pause] still stuck in traffic."
+ ],
+ [
+  "11_midline_shift",
+  "[warm, theatrical, strong Spanish accent, breathless, speaking fast] Close the laptop, unplug the router, hide the cables. [voice drops to a whisper] And whatever it asks you... [slow, deadly serious] do not click accept."
+ ],
+ [
+  "12_cracking_up",
+  "[warm, theatrical, strong Spanish accent, straight-faced, trying very hard to stay serious] No, really, the new logo is great. [cracking up despite himself] I'm sorry, it just looks like a sad potato."
+ ],
+ [
+  "13_emphasis",
+  "[warm, theatrical, strong Spanish accent] I said the meeting is on <emphasis>Tuesday</emphasis>, not Thursday."
+ ],
+ [
+  "14_fast_slow",
+  "[warm, theatrical, strong Spanish accent] <fast>Read the terms, tick the box, click next, click next, click next,</fast> and then, <slow>very carefully,</slow> read what you just agreed to."
+ ],
+ [
+  "15_soft_stress_forceful",
+  "[warm, theatrical, strong Spanish accent] <soft>It's alright, take your time.</soft> But this part <stress>really</stress> matters. <forceful>Do not skip the backup.</forceful>"
+ ],
+ [
+  "16_direction_spanish",
+  "[cálido, teatral, fuerte acento español, conteniendo las lágrimas, pero sonriendo] I'm fine. Really. Go and enjoy the party."
+ ],
+ [
+  "17_multilingual",
+  "[warm, theatrical, strong Spanish accent] Welcome back to the channel. Bienvenidos de nuevo. Hoy vamos a probar un modelo de voz nuevo."
+ ],
+ [
+  "18_dialogue",
+  "<|speaker:0|> [warm, theatrical, strong Spanish accent, nervous, speaking fast] So, the good news is the server is up. <|speaker:1|> [calm, suspicious] And the bad news? <|speaker:0|> [small laugh] It's up on the wrong continent. <|speaker:1|> [sighs] Of course it is."
+ ],
+ [
+  "19_no_reference",
+  "This line has no reference clip at all, so the model chooses a voice on its own."
+ ]
+]
